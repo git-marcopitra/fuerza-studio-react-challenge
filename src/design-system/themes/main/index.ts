@@ -11,4 +11,6 @@ const MainTheme = {
   breakpoints,
 };
 
+export type Theme = typeof MainTheme;
+
 export default MainTheme;

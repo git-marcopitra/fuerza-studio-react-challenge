@@ -51,6 +51,4 @@ const Box: FC<BoxProps> = ({ as, hover, active, ...props }) => {
   return <BoxElement {...props} />;
 };
 
-Box.displayName = 'Box';
-
 export default Box;

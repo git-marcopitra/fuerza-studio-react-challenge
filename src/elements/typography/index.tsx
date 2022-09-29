@@ -37,6 +37,7 @@ const Typography: FC<TypographyProps> = ({ as, hover, active, ...props }) => {
         cursor: true,
         whiteSpace: true,
         textTransform: true,
+        textDecoration: true,
       })
     )
   );

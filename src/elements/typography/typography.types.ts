@@ -30,4 +30,5 @@ export interface TypographyProps
   cursor?: ResponsiveValue<CSSProperties['cursor']>;
   whiteSpace?: ResponsiveValue<CSSProperties['whiteSpace']>;
   textTransform?: ResponsiveValue<CSSProperties['textTransform']>;
+  textDecoration?: ResponsiveValue<CSSProperties['textDecoration']>;
 }
