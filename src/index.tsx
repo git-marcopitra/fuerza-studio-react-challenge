@@ -1,15 +1,19 @@
-import React from 'react';
+import { Global, ThemeProvider } from '@emotion/react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import GlobalStyles from './design-system/global-styles';
+import { MainTheme } from './design-system/themes';
+import Router from './router';
 import { setupServer } from './services/mirage/server';
 
-if (process.env.NODE_ENV === 'development') {
-  setupServer();
-}
+if (process.env.NODE_ENV === 'development') setupServer();
 
 ReactDOM.render(
-  <React.StrictMode>
-      <App />
-  </React.StrictMode>,
+  <StrictMode>
+    <ThemeProvider theme={MainTheme}>
+      <Global styles={GlobalStyles} />
+      <Router />
+    </ThemeProvider>
+  </StrictMode>,
   document.getElementById('root')
 );
