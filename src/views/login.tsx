@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import { Box } from '../elements';
+import Layout from '../components/layout';
 import Typography from '../elements/typography';
 
 const LoginView: FC = () => (
-  <Box>
+  <Layout bigHeader>
     <Typography color="text.secondary">Login</Typography>
-  </Box>
+  </Layout>
 );
 
 export default LoginView;

@@ -1,7 +1,6 @@
-import React, { FC } from "react";
+import React, { FC } from 'react';
+import Layout from '../components/layout';
 
-const HomeView: FC = () => (
-  <div>Fuerza Test</div>
-);
+const HomeView: FC = () => <Layout>Fuerza Test</Layout>;
 
 export default HomeView;
