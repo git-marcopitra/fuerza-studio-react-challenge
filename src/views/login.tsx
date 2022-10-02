@@ -57,7 +57,7 @@ const LoginView: FC = () => {
           Forgot Password?
         </Typography>
         <Box display="flex" justifyContent="center" my="XL">
-          <Link to={ROUTES[Routes.Home]}>
+          <Link to={ROUTES[Routes.ListJournal]}>
           <Button variant="primary">Log in</Button>
           </Link>
         </Box>

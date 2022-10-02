@@ -1,14 +1,14 @@
 import { Routes, ROUTES } from '../constants';
 import CreateJournalView from '../views/create-journal';
-import HomeView from '../views/home';
+import ListJournalView from '../views/list-journal';
 import LoginView from '../views/login';
 import SignupView from '../views/signup';
 import { IRouterData } from './router.types';
 
 export const routerData: ReadonlyArray<IRouterData> = [
   {
-    path: ROUTES[Routes.Home],
-    Component: HomeView,
+    path: ROUTES[Routes.ListJournal],
+    Component: ListJournalView,
     private: true,
   },
   {
