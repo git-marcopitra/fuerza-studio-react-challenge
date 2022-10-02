@@ -18,7 +18,7 @@ const CreateJournalView: FC = () => {
         gridTemplateColumns={['1fr', '1fr', '1fr 1fr']}
         >
         <CreateJournalCover control={control} />
-        <Box width="25rem">
+        <Box maxWidth="25rem" width="100%">
           <TextField
             type="text"
             name="title"
