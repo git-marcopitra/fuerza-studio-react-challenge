@@ -1,3 +1,4 @@
+export { default as BackArrowSVG } from './back-arrow';
 export { default as BackgroundSVG } from './background';
 export { default as JournalCoverSVG } from './journal-cover';
 export { default as JournalCoverMiniLightSVG } from './journal-cover-mini-light';

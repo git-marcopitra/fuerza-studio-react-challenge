@@ -45,7 +45,7 @@ const TextField: FC<{
         </Box>
       )}
       <Input
-        p={'L'}
+        p="L"
         type={type}
         width="100%"
         border="none"
