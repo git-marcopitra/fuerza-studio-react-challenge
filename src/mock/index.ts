@@ -23,4 +23,32 @@ export const JOURNALS = [
     id: 6,
     title: 'Javascript',
   },
-];
+].map((journal) => ({
+  ...journal,
+  posts: [
+    {
+      title: 'The h1, h2, h3, h4, h5 and h6 elements',
+      body: 'Some note here',
+    },
+    {
+      title: 'The article element',
+      body: 'Other note here',
+    },
+    {
+      title: 'The h1, h2, h3, h4, h5 and h6 elements',
+      body: 'Some note here',
+    },
+    {
+      title: 'The article element',
+      body: 'Other note here',
+    },
+    {
+      title: 'The h1, h2, h3, h4, h5 and h6 elements',
+      body: 'Some note here',
+    },
+    {
+      title: 'The article element',
+      body: 'Other note here',
+    },
+  ],
+}));

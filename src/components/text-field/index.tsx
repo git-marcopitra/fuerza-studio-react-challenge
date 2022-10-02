@@ -39,7 +39,7 @@ const TextField: FC<{
           py={isLabelPlaceholder ? 'L' : 'S'}
           fontSize={isLabelPlaceholder ? 'M' : 'S'}
           fontWeight={isLabelPlaceholder ? '600' : '400'}
-          color={isLabelPlaceholder ? 'accent' : 'text.secondary'}
+          color={isLabelPlaceholder ? 'accent' : 'text.label'}
         >
           <label htmlFor={textFieldId}>{label}</label>
         </Box>

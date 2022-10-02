@@ -16,6 +16,7 @@ const CreateJournalPostView: FC = () => {
       (journalId ? JOURNALS.find(({ id }) => +journalId === id) : null) ?? {
         id: 0,
         title: 'HTML',
+        posts: [],
       },
     [journalId]
   );
@@ -26,7 +27,7 @@ const CreateJournalPostView: FC = () => {
 
   return (
     <Layout>
-      <Box display="flex" alignItems="center" mt="XXL">
+      <Box display="flex" alignItems="center" mt="XL">
         <Link
           to={ROUTES[Routes.ListJournalPost].replace(
             ':journalId',
