@@ -7,6 +7,7 @@ const colors = {
   text: {
     primary: systemColors.NEUTRAL_300,
     secondary: systemColors.NEUTRAL_200,
+    inverted: systemColors.NEUTRAL_100,
   },
 };
 

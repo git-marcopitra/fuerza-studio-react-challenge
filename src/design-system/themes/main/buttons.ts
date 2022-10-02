@@ -22,14 +22,13 @@ const primary = css`
 const secondary = css`
   outline: none;
   cursor: pointer;
-  min-width: 160px;
   font-weight: bold;
   position: relative;
-  padding: ${space.L};
   display: inline-block;
   border-radius: 1.6rem;
   background: transparent;
   color: ${colors.accent};
+  padding: ${space.M} ${space.L};
   font-size: ${fontSizes.button};
   transition: all 0.3s ease-in-out;
   border: 1px solid ${colors.accent};
