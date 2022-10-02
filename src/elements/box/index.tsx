@@ -22,7 +22,10 @@ const Box: FC<BoxProps> = ({ as, hover, active, ...props }) => {
   const BoxElement = styled(as || 'div')(
     css({
       ...(hover && { transition: 'all 250ms ease-in-out', '&:hover': hover }),
-      ...(active && { transition: 'all 250ms ease-in-out', '&:active': active }),
+      ...(active && {
+        transition: 'all 250ms ease-in-out',
+        '&:active': active,
+      }),
     }),
     compose(
       grid,
@@ -42,6 +45,7 @@ const Box: FC<BoxProps> = ({ as, hover, active, ...props }) => {
         transform: true,
         transition: true,
         whiteSpace: true,
+        pointerEvents: true,
       })
     )
   );

@@ -5,22 +5,16 @@ import { LayoutProps } from './layout.types';
 
 const Layout: FC<LayoutProps> = ({ bigHeader, children }) => (
   <>
-    <Box position="fixed" height="100vh" py="5vh">
+    <Box position="fixed" height="100vh" py="5vh" zIndex="-1" bg="background" width="100vw">
       <BackgroundSVG height="100%" />
     </Box>
-    <Box
-      p="XL"
-      display="flex"
-      bg="background"
-      minHeight="100vh"
-      flexDirection="column"
-    >
+    <Box p="XL" display="flex" minHeight="100vh" flexDirection="column">
       <Box as="header" mt={bigHeader ? '25vh' : 'unset'}>
         <Box height={bigHeader ? '2.5rem' : '1.8rem'}>
           <LogoSVG height="100%" />
         </Box>
       </Box>
-      <Box as="main">{children}</Box>
+      <Box as="main" flex="1">{children}</Box>
     </Box>
   </>
 );

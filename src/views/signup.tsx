@@ -5,11 +5,12 @@ import { Layout, TextField } from '../components';
 import { Routes, ROUTES } from '../constants';
 import { Box, Button, Typography } from '../elements';
 
-const LoginView: FC = () => {
+const SignupView: FC = () => {
   const { register, getValues } = useForm({
     defaultValues: {
       username: '',
       password: '',
+      email: '',
     },
   });
 
@@ -25,11 +26,11 @@ const LoginView: FC = () => {
           justifyContent="space-between"
         >
           <Typography as="h1" fontWeight="400">
-            Sign in
+            Sign up
           </Typography>
-          <Link to={ROUTES[Routes.Signup]}>
+          <Link to={ROUTES[Routes.Login]}>
             <Typography textDecoration="underline" fontWeight="600" fontSize="S">
-              Sign up
+              Already have an account
             </Typography>
           </Link>
         </Box>
@@ -38,32 +39,28 @@ const LoginView: FC = () => {
           name="username"
           register={register}
           getValues={getValues}
-          label="Your username"
+          label="Define a username"
         />
         <TextField
           type="password"
           name="password"
           register={register}
           getValues={getValues}
-          label="Your password"
+          label="Set your password"
         />
-        <Typography
-          my="M"
-          fontSize="S"
-          color="accent"
-          textAlign="right"
-          textDecoration="underline"
-        >
-          Forgot Password?
-        </Typography>
+        <TextField
+          type="email"
+          name="email"
+          register={register}
+          getValues={getValues}
+          label="Email (optional)"
+        />
         <Box display="flex" justifyContent="center" my="XL">
-          <Link to={ROUTES[Routes.Home]}>
-          <Button variant="primary">Log in</Button>
-          </Link>
+          <Button variant="primary">Create account</Button>
         </Box>
       </Box>
     </Layout>
   );
 };
 
-export default LoginView;
+export default SignupView;

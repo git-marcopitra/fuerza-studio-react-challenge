@@ -6,6 +6,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@styled-system/css": "^5.1.5",
+    "@types/uuid": "^8.3.4",
     "axios": "^0.19.2",
     "dayjs": "^1.8.27",
     "emotion": "^11.0.0",
@@ -14,7 +15,8 @@
     "react-hook-form": "^7.36.1",
     "react-router-dom": "^6.4.1",
     "react-scripts": "3.4.1",
-    "styled-system": "^5.1.5"
+    "styled-system": "^5.1.5",
+    "uuid": "^9.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -35,4 +35,5 @@ export interface BoxProps
   clipPath?: ResponsiveValue<CSSProperties['clipPath']>;
   whiteSpace?: ResponsiveValue<CSSProperties['whiteSpace']>;
   transition?: ResponsiveValue<CSSProperties['transition']>;
+  pointerEvents?: ResponsiveValue<CSSProperties['pointerEvents']>;
 }
