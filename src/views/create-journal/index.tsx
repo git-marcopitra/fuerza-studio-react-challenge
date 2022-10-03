@@ -15,7 +15,7 @@ const CreateJournalView: FC = () => {
     defaultValues: { title: 'HTM_' },
   });
 
-  const createPost = async () => {
+  const createJournal = async () => {
     const title = getValues('title');
 
     const data = { title, userId: user!.id };
@@ -30,7 +30,7 @@ const CreateJournalView: FC = () => {
   };
 
   const onSubmit = () =>
-    toast.promise(createPost(), {
+    toast.promise(createJournal(), {
       loading: 'Creating...',
       success: () => {
         navigate(ROUTES[Routes.ListJournal]);

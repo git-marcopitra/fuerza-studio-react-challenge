@@ -1,4 +1,5 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link, useParams } from 'react-router-dom';
 import { v4 } from 'uuid';
 import { Layout } from '../../components';
@@ -6,20 +7,50 @@ import { BackArrowSVG, PlusSVG } from '../../components/svg';
 import MainIllustration from '../../components/svg/main-illustration';
 import { Routes, ROUTES } from '../../constants';
 import { Box, Button, Typography } from '../../elements';
-import { JOURNALS } from '../../mock';
+import { useUser } from '../../hooks';
+import { Journal } from '../../interfaces/journal.interface';
 
 const ListJournalPostView: FC = () => {
+  const { user } = useUser();
   const { journalId } = useParams();
+  const [journal, setJournal] = useState<Journal | undefined>();
+  const [journalsEntries, setJournalsEntries] = useState([]);
 
-  const { title, posts } = useMemo(
-    () =>
-      (journalId ? JOURNALS.find(({ id }) => +journalId === id) : null) ?? {
-        id: 0,
-        title: 'HTML',
-        posts: [],
-      },
-    [journalId]
-  );
+  useEffect(() => {
+    toast.promise(
+      (async () => {
+        const responseJournal = await fetch(
+          `https://fuerza.test/journals/${user?.id}`
+        );
+
+        const resultJournal = await responseJournal.json();
+
+        if (resultJournal?.data?.isError)
+          throw new Error(resultJournal.data.message);
+
+        setJournal(
+          resultJournal.journals.find(
+            (journal: Journal) => journal.id === journalId
+          )
+        );
+
+        const responseEntries = await fetch(
+          `https://fuerza.test/journals/entries/${user?.id}`
+        );
+        const resultEntries = await responseEntries.json();
+
+        if (resultEntries?.data?.isError)
+          throw new Error(resultEntries.data.message);
+
+        setJournalsEntries(resultEntries.entries);
+      })(),
+      {
+        loading: 'Loading posts...',
+        success: 'Loaded!',
+        error: ({ message }) => message,
+      }
+    );
+  }, [user, journalId]);
 
   return (
     <Layout>
@@ -36,10 +67,10 @@ const ListJournalPostView: FC = () => {
             </Box>
           </Link>
           <Typography fontFamily="'Abhaya Libre', serif" as="h2" ml="L">
-            {title}
+            {journal?.title}
           </Typography>
         </Box>
-        {JOURNALS.length ? (
+        {journalsEntries.length ? (
           <Link
             to={ROUTES[Routes.CreateJournalPost].replace(
               ':journalId',
@@ -55,14 +86,14 @@ const ListJournalPostView: FC = () => {
           </Link>
         ) : undefined}
       </Box>
-      {posts.length ? (
+      {journalsEntries.length ? (
         <Box
           my="XL"
           gridGap="1rem"
           display="grid"
           gridTemplateColumns={['1fr 1fr', '1fr 1fr', '1fr 1fr 1fr']}
         >
-          {posts.map(({ title }) => (
+          {journalsEntries.map(({ title }) => (
             <Box
               key={v4()}
               height="12rem"
@@ -105,7 +136,7 @@ const ListJournalPostView: FC = () => {
             fontFamily="'Abhaya Libre', serif"
             fontSize="XXL"
           >
-            {title}
+            {journal?.title}
           </Typography>
           <Box width={['100%', '100%', '30rem']} mb="XXL">
             <MainIllustration width="100%" />
