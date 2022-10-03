@@ -1,11 +1,15 @@
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { Layout, TextField } from '../components';
-import { Routes, ROUTES } from '../constants';
-import { Box, Button, Typography } from '../elements';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import { Layout, TextField } from '../../components';
+import { Routes, ROUTES } from '../../constants';
+import { Box, Button, Typography } from '../../elements';
+import { useUser } from '../../hooks';
 
 const SignupView: FC = () => {
+  const { setUser } = useUser();
+  const navigate = useNavigate();
   const { register, getValues } = useForm({
     defaultValues: {
       username: '',
@@ -13,6 +17,32 @@ const SignupView: FC = () => {
       email: '',
     },
   });
+
+  const signup = async () => {
+    const data = getValues();
+    const result = await fetch('https://fuerza.test/auth/signup', {
+      method: 'post',
+      body: JSON.stringify(data),
+    });
+
+    const json = await result.json();
+
+    if (json.isError) throw new Error('Request failed!');
+
+    window.sessionStorage.setItem('token', json.token);
+
+    setUser(json.user);
+  };
+
+  const onSubmit = () =>
+    toast.promise(signup(), {
+      loading: 'Loading...',
+      error: ({ message }) => message,
+      success: () => {
+        navigate(ROUTES[Routes.ListJournal]);
+        return 'Your account was created';
+      },
+    });
 
   return (
     <Layout bigHeader>
@@ -29,7 +59,11 @@ const SignupView: FC = () => {
             Sign up
           </Typography>
           <Link to={ROUTES[Routes.Login]}>
-            <Typography textDecoration="underline" fontWeight="600" fontSize="S">
+            <Typography
+              textDecoration="underline"
+              fontWeight="600"
+              fontSize="S"
+            >
               Already have an account
             </Typography>
           </Link>
@@ -56,7 +90,9 @@ const SignupView: FC = () => {
           label="Email (optional)"
         />
         <Box display="flex" justifyContent="center" my="XL">
-          <Button variant="primary">Create account</Button>
+          <Button variant="primary" onClick={onSubmit}>
+            Create account
+          </Button>
         </Box>
       </Box>
     </Layout>
