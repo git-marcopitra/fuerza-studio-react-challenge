@@ -1,11 +1,18 @@
 import React, { FC } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Guard from './guard';
 import { routerData } from './router.data';
 
 const router = createBrowserRouter(
-  routerData.map(({ path, Component }) => ({
+  routerData.map(({ path, Component, auth }) => ({
     path,
-    element: <Component />,
+    element: auth ? (
+      <Guard>
+        <Component />
+      </Guard>
+    ) : (
+      <Component />
+    ),
   }))
 );
 

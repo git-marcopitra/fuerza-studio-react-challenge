@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { Layout, TextField } from '../../components';
 import { Routes, ROUTES } from '../../constants';
 import { Box, Button, Typography } from '../../elements';
 import { useUser } from '../../hooks';
 
 const SignupView: FC = () => {
-  const { setUser } = useUser();
+  const { user, setter } = useUser();
   const navigate = useNavigate();
   const { register, getValues } = useForm({
     defaultValues: {
@@ -31,7 +31,7 @@ const SignupView: FC = () => {
 
     window.sessionStorage.setItem('token', json.token);
 
-    setUser(json.user);
+    setter(json.user);
   };
 
   const onSubmit = () =>
@@ -43,6 +43,8 @@ const SignupView: FC = () => {
         return 'Your account was created';
       },
     });
+
+  if (user) return <Navigate replace to={ROUTES[Routes.ListJournal]} />;
 
   return (
     <Layout bigHeader>

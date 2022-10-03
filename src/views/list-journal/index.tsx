@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { v4 } from 'uuid';
 import { Layout } from '../../components';
@@ -10,17 +11,40 @@ import {
 import MainIllustration from '../../components/svg/main-illustration';
 import { Routes, ROUTES } from '../../constants';
 import { Box, Button, Typography } from '../../elements';
-import { JOURNALS } from '../../mock';
+import { useUser } from '../../hooks';
 
 const ListJournalView: FC = () => {
   const navigate = useNavigate();
+  const { user } = useUser();
+  const [journals, setJournals] = useState([]);
+
   const goToJournal = (id: number) => () =>
     navigate(ROUTES[Routes.ListJournalPost].replace(':journalId', String(id)));
+
+  useEffect(() => {
+    toast.promise(
+      (async () => {
+        const response = await fetch(
+          `https://fuerza.test/journals/${user?.id}`
+        );
+        const result = await response.json();
+
+        if (result?.data?.isError) throw new Error(result.data.message);
+
+        setJournals(result.journals);
+      })(),
+      {
+        loading: 'Loading journals...',
+        success: 'Loaded!',
+        error: ({ message }) => message,
+      }
+    );
+  }, [user]);
 
   return (
     <Layout
       headerButton={
-        JOURNALS.length ? (
+        journals.length ? (
           <Link to={ROUTES[Routes.CreateJournal]}>
             <Button variant="secondary">
               <Box as="span" display="inline-block" width="0.6rem" mr="M">
@@ -32,14 +56,14 @@ const ListJournalView: FC = () => {
         ) : undefined
       }
     >
-      {JOURNALS.length ? (
+      {journals.length ? (
         <Box
           display="grid"
           gridGap="2rem"
           mt={['XL', 'XL', 'XXXL']}
           gridTemplateColumns={['1fr 1fr', '1fr 1fr', '1fr 1fr 1fr']}
         >
-          {JOURNALS.map(({ id, title }, index) => (
+          {journals.map(({ id, title }, index) => (
             <Box
               key={v4()}
               display="flex"

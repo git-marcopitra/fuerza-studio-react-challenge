@@ -11,7 +11,7 @@ export const routerData: ReadonlyArray<IRouterData> = [
   {
     path: ROUTES[Routes.ListJournal],
     Component: ListJournalView,
-    private: true,
+    auth: true,
   },
   {
     path: ROUTES[Routes.Login],
@@ -24,13 +24,16 @@ export const routerData: ReadonlyArray<IRouterData> = [
   {
     path: ROUTES[Routes.CreateJournal],
     Component: CreateJournalView,
+    auth: true,
   },
   {
     path: ROUTES[Routes.ListJournalPost],
     Component: ListJournalPostView,
+    auth: true,
   },
   {
     path: ROUTES[Routes.CreateJournalPost],
     Component: CreateJournalPostView,
+    auth: true,
   },
 ];

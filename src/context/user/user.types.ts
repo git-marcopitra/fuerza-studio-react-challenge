@@ -1,6 +1,5 @@
-import { Dispatch, SetStateAction } from 'react';
-
 export interface IUser {
+  id: string;
   email?: string;
   username: string;
   journalIds: ReadonlyArray<string> | null;
@@ -8,5 +7,5 @@ export interface IUser {
 
 export interface IUserContext {
   user: IUser | null;
-  setUser: Dispatch<SetStateAction<IUser | null>>;
+  setter: (data: IUser | null) => void;
 }
