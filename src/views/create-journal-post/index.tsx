@@ -68,7 +68,9 @@ const CreateJournalPostView: FC = () => {
     toast.promise(createPost(), {
       loading: 'Creating...',
       success: () => {
-        navigate(ROUTES[Routes.ListJournal]);
+        navigate(
+          ROUTES[Routes.ListJournalPost].replace(':journalId', '' + journalId)
+        );
         return 'Created Successfully';
       },
       error: ({ message }) => message,
